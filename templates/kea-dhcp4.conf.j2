@@ -4,25 +4,25 @@
         "valid-lifetime": 14400,
         "max-valid-lifetime": 14400,
         "option-data": [
-            { "name": "routers", "data": " {{ dhcp.router }} " },
-            { "name": "broadcast-address", "data": " {{ dhcp.bcast }} " },
-            { "name": "subnet-mask", "data": " {{ dhcp.netmask }} " },
+            { "name": "routers", "data": "{{ dhcp.router }}" },
+            { "name": "broadcast-address", "data": "{{ dhcp.bcast }}" },
+            { "name": "subnet-mask", "data": "{{ dhcp.netmask }}" },
 
 {% if dhcp.dns is defined and dhcp.dns != "" %}
-            { "name": "domain-name-servers", "data": " {{ dhcp.dns }} " },
-            { "name": "domain-search", "data": " {{ dns.clusterid }}.{{ dns.domain | lower }}", "{{ dns.domain | lower }} " },
+            { "name": "domain-name-servers", "data": "{{ dhcp.dns }}" },
+            { "name": "domain-search", "data": "{{ dns.clusterid }}.{{ dns.domain | lower }}", "{{ dns.domain | lower }}" },
 {% else %}
-            { "name": "domain-name-servers", "data": " {{ helper.ipaddr }} " },
+            { "name": "domain-name-servers", "data": "{{ helper.ipaddr }}" },
 {% endif %}
             
 {# This is PXE specific #}
 {% if ppc64le is sameas true %}
-            { "name": "boot-file-name", "data": " boot/grub2/powerpc-ieee1275/core.elf " },
+            { "name": "boot-file-name", "data": "boot/grub2/powerpc-ieee1275/core.elf" },
 {% else %}
-            { "name": "boot-file-name", "data": " pxelinux.0 " },
+            { "name": "boot-file-name", "data": "pxelinux.0" },
 {% endif %}
 
-            { "name": "domain-name", "data": " {{ dns.clusterid }}.{{ dns.domain | lower }} " }
+            { "name": "domain-name", "data": "{{ dns.clusterid }}.{{ dns.domain | lower }}" }
 
         ],
         "subnet4": [
