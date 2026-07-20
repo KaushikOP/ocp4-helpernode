@@ -184,14 +184,6 @@
       state: started
       enabled: yes
 
-  - name: Wait for firewalld service start
-    command: firewall-cmd --state
-    register: fw
-    retries: 10
-    delay: 1
-    until: fw.stdout == "running"
-    changed_when: false
-
   - name: Open up firewall ports
     firewalld:
       permanent: yes
